@@ -1,5 +1,5 @@
 .block.left
-	if works
+	if (works && works.length > 0)
 		each image in works[0].images
 			if (image.position == 'left')
 				.image_item
@@ -7,7 +7,7 @@
 					.image: img(src= image.thumb)
 
 .block.right
-	if works
+	if (works && works.length > 0)
 		each image in works[0].images
 			if (image.position == 'right')
 				.image_item
