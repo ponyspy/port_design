@@ -1,0 +1,13 @@
+.block.left
+	each image in works[0].images
+		if (image.position == 'left')
+			.image_item
+				.marquee: span(class=image.marquee, class=load && 'go')= image.description
+				.image: img(src= image.thumb)
+
+.block.right
+	each image in works[0].images
+		if (image.position == 'right')
+			.image_item
+				.marquee: span(class=image.marquee, class=load && 'go')= image.description
+				.image: img(src= image.thumb)
