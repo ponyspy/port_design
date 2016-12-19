@@ -1,7 +1,7 @@
 {
-  "name": "portfolio",
+  "name": "port_design",
   "version": "1.0.0",
-  "description": "portfolio ====",
+  "description": "port_design ====",
   "main": "app.js",
   "dependencies": {
     "async": "^2.0.0",
@@ -42,12 +42,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/moscowmanege/complex.git"
+    "url": "https://github.com/ponyspy/port_design.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/moscowmanege/complex/issues"
+    "url": "https://github.com/ponyspy/port_design/issues"
   },
-  "homepage": "https://github.com/moscowmanege/complex"
+  "homepage": "https://github.com/ponyspy/port_design"
 }
