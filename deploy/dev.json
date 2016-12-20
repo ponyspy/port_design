@@ -1,10 +1,10 @@
 {
 	"apps": [
 		{
-			"name": "wassia",
-			"script": "./apps/wassia/app.js",
+			"name": "wassya",
+			"script": "./apps/wassya/app.js",
 			"exec_mode": "fork",
-			"watch": ["apps/wassia/app.js", "apps/wassia/models", "apps/wassia/routes"],
+			"watch": ["apps/wassya/app.js", "apps/wassya/models", "apps/wassya/routes"],
 			"autorestart": false,
 			"kill_timeout": 1600,
 			"env": {

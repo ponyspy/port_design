@@ -6,7 +6,7 @@ exports.index = function(req, res, next) {
 
 		var font = fonts[Math.floor(Math.random() * fonts.length)];
 
-		figlet('WASSIA\nSTARGAZER', {font: font, horizontalLayout: 'default', verticalLayout: 'default'}, function(err, data) {
+		figlet('WASSYA\nSTARGAZER', {font: font, horizontalLayout: 'default', verticalLayout: 'default'}, function(err, data) {
 			if (err) return next(err);
 
 			res.render('admin/index.jade', {data: data, font: font});

@@ -1,4 +1,4 @@
-global.__app_name = 'wassia';
+global.__app_name = 'wassya';
 global.__glob_root = __dirname.replace('/apps/' + __app_name, '');
 global.__app_root = __dirname;
 

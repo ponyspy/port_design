@@ -1,8 +1,8 @@
 {
 	"apps": [
 		{
-			"name": "wassia",
-			"script": "./apps/wassia/app.js",
+			"name": "wassya",
+			"script": "./apps/wassya/app.js",
 			"exec_mode": "fork",
 			"autorestart": true,
 			"min_uptime": "300s",
