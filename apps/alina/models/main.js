@@ -23,8 +23,11 @@ var userSchema = new Schema({
 
 var workSchema = new Schema({
 	title: { type: String, trim: true },
+	description: { type: String, trim: true },
 	status: String,
 	images: [{
+		size: String,
+		gallery: String,
 		description: { type: String, trim: true },
 		original: String,
 		thumb: String
@@ -40,6 +43,7 @@ var workSchema = new Schema({
 
 
 workSchema.index({'title': 'text'});
+workSchema.index({'date': -1});
 
 
 // ------------------------

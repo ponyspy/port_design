@@ -37,7 +37,7 @@ module.exports = function(Model, Params) {
 			user.save(function(err, user) {
 				if (err) return next(err);
 
-				res.redirect('admin/users');
+				res.redirect('/admin/users');
 			});
 		});
 	};

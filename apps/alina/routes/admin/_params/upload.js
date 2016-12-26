@@ -31,7 +31,9 @@ module.exports.images = function(obj, base_path, upload_images, callback) {
 			async.eachOfSeries(upload_images.path, function(item, i, callback) {
 				images[i] = { path: null, description: [] };
 				images[i].path = upload_images.path[i];
-				images[i].description = upload_images.description[i]
+				images[i].description = upload_images.description[i];
+				images[i].size = upload_images.size[i];
+				images[i].gallery = upload_images.gallery[i];
 
 				callback();
 
@@ -44,14 +46,16 @@ module.exports.images = function(obj, base_path, upload_images, callback) {
 
 					gm(public_path + image.path).write(public_path + original_path, function(err) {
 						gm(public_path + image.path).size({bufferStream: true}, function(err, size) {
-							this.resize(size.width > 620 ? 620 : false, false);
-							this.quality(size.width > 620 ? 80 : 100);
+							this.resize(size.width > 800 ? 800 : false, false);
+							this.quality(size.width > 800 ? 80 : 100);
 							this.write(public_path + thumb_path, function(err) {
 								var obj_img = {};
 
 								obj_img.original = original_path;
 								obj_img.thumb = thumb_path;
 								obj_img.description = image.description;
+								obj_img.size = image.size;
+								obj_img.gallery = image.gallery;
 
 								obj.images.push(obj_img);
 

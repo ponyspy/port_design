@@ -3,6 +3,8 @@ mixin items(works)
 		.list_item
 			a.item_rm.work(href='#', id=work._id) удалить
 			a.item_title(href='/admin/works/edit/' + work._id, class=work.status =='hidden' ? 'hidden': '')= work.title || '!!! ПУСТОЕ ПОЛЕ !!!'
+			span= ' | '
+			span.item_images= work.images.length
 
 mixin counters(count, skip)
 	a.list_back(href='#'): b назад

@@ -30,6 +30,8 @@ block content
 		form(action="", method="post")
 			.form_title Название:
 			+form_text_single('title')
+			.form_title Описание:
+			+form_text_multi('description')
 			.form_title Изображения:
 			+form_images_upload()
 			.form_title Видимость:

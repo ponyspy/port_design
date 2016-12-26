@@ -12,5 +12,17 @@
 				"NODE_ENV": "development"
 			}
 		},
+		{
+			"name": "alina",
+			"script": "./apps/alina/app.js",
+			"exec_mode": "fork",
+			"watch": ["apps/alina/app.js", "apps/alina/models", "apps/alina/routes"],
+			"autorestart": false,
+			"kill_timeout": 1600,
+			"env": {
+				"PORT": 3001,
+				"NODE_ENV": "development"
+			}
+		},
 	]
 }
