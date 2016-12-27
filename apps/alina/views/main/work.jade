@@ -5,21 +5,26 @@ block paths
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/main.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/work.css' + version)
 
 block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/main.js' + version)
+	script(type='text/javascript', src='/build/js/' + __app_name + '/work.js' + version)
 
 block content
+	- var sizes = ['size_400', 'size_600', 'size_800' ]
 	h1= work.title
 	a(href='/') back
 	br
 	br
 	each item in images
 		if item.length
-			hr
-			.gallery
-				each g_item in item
-					img(src=g_item.thumb, width=200 + 'px')
-			hr
-		img(src=item.thumb, width=item.size + 'px')
-		br
+			.gallery_block
+				.gallery_cover: .gallery_outer: .gallery_inner
+					each image in item
+						img.column(src=image.thumb, full=image.original)
+				.gallery_navigate
+					.gallery_navigate_item.back <<
+					.gallery_navigate_item.forward >>
+		else
+			img.image(src=item.thumb, class=sizes[sizes.indexOf('size_' + item.size)])
