@@ -26,7 +26,7 @@ var workSchema = new Schema({
 	description: { type: String, trim: true },
 	status: String,
 	images: [{
-		size: String,
+		size: Number,
 		gallery: Boolean,
 		description: { type: String, trim: true },
 		original: String,

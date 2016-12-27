@@ -11,4 +11,11 @@ block content_scripts
 
 block content
 	h1 work!
-	a(href='/auth') stargazer
+	a(href='/') back
+	br
+	br
+	each item in images
+		if item.length
+			each gallery in item
+				h3= gallery
+		b= item

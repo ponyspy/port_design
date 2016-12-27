@@ -6,13 +6,3 @@ html
 	body
 		.content_block
 			block content
-		.footer_block
-			.left
-				.counter
-					span.current 1
-					//- span /
-					//- span.count 6
-			.right
-				if (session && session.user_id)
-					a.stargazer(href='/auth') stargazer
-				span.cv cv
