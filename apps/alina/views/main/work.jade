@@ -1,7 +1,7 @@
 extends layout
 
 block paths
-	- var content_title= 'alina saulova / work'
+	- var content_title= 'alina saulova / works / ' + work.title
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/main.css' + version)
@@ -10,12 +10,16 @@ block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/main.js' + version)
 
 block content
-	h1 work!
+	h1= work.title
 	a(href='/') back
 	br
 	br
 	each item in images
 		if item.length
-			each gallery in item
-				h3= gallery
-		b= item
+			hr
+			.gallery
+				each g_item in item
+					img(src=g_item.thumb, width=200 + 'px')
+			hr
+		img(src=item.thumb, width=item.size + 'px')
+		br
