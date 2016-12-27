@@ -1,7 +1,7 @@
 extends layout
 
 block paths
-	- var content_title= 'alina saulova'
+	- var content_title= 'alina saulova / work'
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/main.css' + version)
@@ -10,10 +10,5 @@ block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/main.js' + version)
 
 block content
-	h1 hello!
+	h1 work!
 	a(href='/auth') stargazer
-	br
-	br
-	each work in works
-		a(href='/works/' + work._short_id)= work.title
-		br

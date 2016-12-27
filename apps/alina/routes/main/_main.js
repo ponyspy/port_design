@@ -4,7 +4,7 @@ var Model = require(__app_root + '/models/main.js');
 
 var main = {
 	index: require('./index.js')(Model),
-	content: require('./content.js')
+	works: require('./works.js')(Model)
 };
 
 module.exports = (function() {
@@ -12,10 +12,9 @@ module.exports = (function() {
 
 	router.route('/')
 		.get(main.index.index)
-		.post(main.index.get_works);
 
-	router.route('/cv')
-		.get(main.content.cv);
+	router.route('/works/:short_id')
+		.get(main.works.index);
 
 	return router;
 })();
