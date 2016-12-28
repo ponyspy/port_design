@@ -3,7 +3,7 @@
 	width 100%
 	margin 0 auto
 	display block
-	margin-bottom 40px
+	margin-bottom 60px
 	&.size_400
 		max-width 400px
 	&.size_600
@@ -11,51 +11,35 @@
 	&.size_800
 		max-width 800px
 
-.gallery_block
-	overflow hidden
+.gallery-block
+	margin-bottom 60px
+
+.swiper-container
 	max-width 800px
-	margin 0 auto
-	margin-bottom 40px
-	// border 1px solid red
+	height 800px
+	margin-left auto
+	margin-right auto
 
-	.gallery_navigate
-		overflow hidden
-		margin-bottom 10px
-		.gallery_navigate_item
-			font 12pt/14pt 'DinProBold'
-			color rgb(85, 38, 188)
-			cursor pointer
-			user-select none
-			float left
-			margin-right 10px
-			&:hover
-				color black
+.swiper-slide
+	background-size contain
+	background-position center
+	background-repeat no-repeat
 
-	.gallery_cover
-		width 100%
-		height 160px
-		overflow hidden
-		margin-right 30px
-		.gallery_outer
-			white-space nowrap
-			overflow scroll
-			vertical-align top
-			width 100%
-			height 180px
-			top 60px
-			bottom 0
-			.gallery_inner
-				display inline-block
-				height 100%
-				.column
-					width auto
-					cursor pointer
-					min-width 80px
-					height 140px
-					border 5px solid rgb(85, 38, 188)
-					margin-right 10px
-					display inline-block
-					&:hover
-						border 5px solid black
-					&:last-child
-						margin-right 0px
+.gallery-top
+	max-width 800px
+	height 600px
+
+.gallery-thumbs
+	height 200px
+	box-sizing border-box
+	padding 10px 0
+
+.gallery-thumbs .swiper-slide
+	width 25%
+	height 100%
+	opacity 0.7
+	&:hover
+		opacity 1
+
+.gallery-thumbs .swiper-slide-active
+	opacity 1
