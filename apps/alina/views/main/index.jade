@@ -11,9 +11,14 @@ block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/main.js' + version)
 
 block title
-	a.title_sub(href='/auth') STARGAZER
+	if (session && session.user_id)
+		a.title_sub(href='/auth') stargazer
 
 block content
-	each work in works
-		a(href='/works/' + work._short_id)= work.title
-		br
+	.works_block
+		each work in works
+			a.work_item(href='/works/' + work._short_id)
+				.work_images
+					each image,i in work.images
+						.work_image(class=(i == 0) && 'active' style='background-image: url(' + image.thumb + ')')
+				.work_title= work.title
