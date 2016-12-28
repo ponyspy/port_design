@@ -4,5 +4,11 @@ html
 		block paths
 		include header
 	body
+		.title_block
+			block title
+			a.logo(href='/'): span alina saulova
+			.contacts
+				a(href='http://facebook.com', target='_blank') F
+				a(href='mailto:sss@ddd.com', target='_blank') @
 		.content_block
 			block content
