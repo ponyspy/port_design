@@ -12,7 +12,10 @@ block content_scripts
 
 block title
 	if (session && session.user_id)
-		a.title_sub(href='/auth') stargazer
+		.title_sub
+			a(href='/auth') stargazer
+			span= ' | '
+			a(href='/auth/logout') выход
 
 block content
 	.works_block
