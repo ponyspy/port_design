@@ -1,22 +1,31 @@
 var rimraf = require('rimraf');
 var runSequence = require('run-sequence');
-var colors = require('colors');
 
 var gulp = require('gulp'),
-		gulpif = require('gulp-if'),
+		util = require('gulp-util'),
 		changed = require('gulp-changed'),
 		rename = require('gulp-rename'),
 		plumber = require('gulp-plumber'),
+		sourcemaps = require('gulp-sourcemaps'),
 		stylus = require('gulp-stylus'),
 		autoprefixer = require('gulp-autoprefixer'),
-		minify = require('gulp-minify'),
+		uglify = require('gulp-uglify'),
 		jshint = require('gulp-jshint');
 
 
-// vars Block
+// ENV Block
 
 
-var Production = false;
+var Production = util.env.p || util.env.prod;
+var Lint = util.env.l || util.env.lint;
+
+console.log([
+	'',
+	'Lint ' + (Lint ? util.colors.underline.green('enable') : util.colors.underline.red('disable'))
+					+ ', build in ' + (Production ? util.colors.underline.green('production') : util.colors.underline.yellow('development'))
+					+ ' mode.',
+	''
+].join('\n'));
 
 
 // Paths Block
@@ -39,35 +48,55 @@ var paths = {
 };
 
 
+// Decorators Block
+
+
+var _ = function(flags, description, fn) {
+	var flags = flags || { lint: false, dev: false, prod: false };
+
+	fn.description = description;
+	fn.flags = {};
+
+	if (flags.lint)	fn.flags['-l --lint']	= 'Lint JavaScript code.';
+	if (flags.dev) fn.flags['-d --dev'] = 'Builds in ' + util.colors.underline.yellow('development') + ' mode (default).';
+	if (flags.prod) fn.flags['-p --prod'] = 'Builds in ' + util.colors.underline.green('production') + ' mode (minification, etc).'
+
+	return fn;
+}
+
+
 // Loggers Block
 
 
 var error_logger = function(error) {
 	console.log([
 		'',
-		'---------- ERROR MESSAGE START ----------'.bold.red.inverse,
+		util.colors.bold.inverse.red('---------- ERROR MESSAGE START ----------'),
 		'',
-		(error.name.red + ' in ' + error.plugin.yellow),
+		(util.colors.red(error.name) + ' in ' + util.colors.yellow(error.plugin)),
 		'',
 		error.message,
-		'----------- ERROR MESSAGE END -----------'.bold.red.inverse,
+		util.colors.bold.inverse.red('----------- ERROR MESSAGE END -----------'),
 		''
 	].join('\n'));
 };
 
 var watch_logger = function(event) {
-	console.log('File ' + event.path.replace(__dirname + '/', '').green + ' was ' + event.type.yellow + ', running tasks...');
+	console.log('File ' + util.colors.green(event.path.replace(__dirname + '/', ''))
+											+ ' was '
+											+ util.colors.yellow(event.type)
+											+ ', running tasks...');
 };
 
 
 // Tasks Block
 
 
-gulp.task('clean', function(callback) {
+gulp.task('clean', _(null, 'Delete dest folder', function(callback) {
 	return rimraf(paths.clean, callback);
-});
+}));
 
-gulp.task('stuff', function() {
+gulp.task('build:stuff', _(null, 'Build Stuff files', function() {
 	return gulp
 		.src(paths.stuff.src)
 		.pipe(changed(paths.stuff.dest))
@@ -76,13 +105,14 @@ gulp.task('stuff', function() {
 			path.dirname = path.dirname.replace('/stuff', '');
 		}))
 		.pipe(gulp.dest(paths.stuff.dest));
-});
+}));
 
-gulp.task('stylus', function() {
+gulp.task('build:stylus', _({ prod: true, dev: true }, 'Build Stylus', function() {
 	return gulp
 		.src(paths.stylus.src)
 		.pipe(changed(paths.stylus.dest))
 		.pipe(plumber(error_logger))
+		.pipe(Production ? sourcemaps.init({ loadMaps: true }) : util.noop())
 		.pipe(stylus({
 			compress: Production
 		}))
@@ -90,48 +120,41 @@ gulp.task('stylus', function() {
 			browsers: ['last 2 versions'],
 			cascade: !Production
 		}))
+		.pipe(Production ? sourcemaps.write('.') : util.noop())
 		.pipe(rename(function(path) {
 			path.dirname = path.dirname.replace('/src/styl', '');
 		}))
 		.pipe(gulp.dest(paths.stylus.dest));
-});
+}));
 
-gulp.task('scripts', function() {
+gulp.task('build:scripts', _({ lint: true, prod: true, dev: true }, 'Build JavaScript', function() {
 	return gulp
 		.src(paths.scripts.src)
 		.pipe(changed(paths.scripts.dest))
 		.pipe(plumber(error_logger))
-		.pipe(jshint({ laxbreak: true, expr: true, '-W041': false }))
-		.pipe(jshint.reporter('jshint-stylish'))
-		.pipe(gulpif(Production, minify({ ext: { min: '.js' }, noSource: true })))
+		.pipe(Lint ? jshint({ laxbreak: true, expr: true, '-W041': false }) : util.noop())
+		.pipe(Lint ? jshint.reporter('jshint-stylish') : util.noop())
+		.pipe(Production ? sourcemaps.init({ loadMaps: true }) : util.noop())
+		.pipe(Production ? uglify() : util.noop())
+		.pipe(Production ? sourcemaps.write('.', { mapSources: function(path) { return path.split('/').slice(-1)[0]; } }) : util.noop())
 		.pipe(rename(function(path) {
 			path.dirname = path.dirname.replace('/src/js', '');
 		}))
 		.pipe(gulp.dest(paths.scripts.dest));
-});
+}));
 
-gulp.task('watch', function() {
-	gulp.watch(paths.scripts.src, ['scripts']).on('change', watch_logger);
-	gulp.watch(paths.stylus.src, ['stylus']).on('change', watch_logger);
-	gulp.watch(paths.stuff.src, ['stuff']).on('change', watch_logger);
-});
+gulp.task('build', ['build:stylus', 'build:scripts', 'build:stuff']);
 
-gulp.task('production', function(callback) {
-	Production = true;
-	callback();
-});
+gulp.task('watch', _(null, 'Watch files and build on change', function() {
+	gulp.watch(paths.scripts.src, ['build:scripts']).on('change', watch_logger);
+	gulp.watch(paths.stylus.src, ['build:stylus']).on('change', watch_logger);
+	gulp.watch(paths.stuff.src, ['build:stuff']).on('change', watch_logger);
+}));
 
 
 // Run Block
 
 
-gulp.task('default', function(callback) {
-	runSequence('clean', ['stylus', 'scripts', 'stuff'], callback);
+gulp.task('default',  function(callback) {
+	runSequence('clean', 'build', callback);
 });
-
-gulp.task('build', function(callback) {
-	runSequence('production', 'clean', ['stylus', 'scripts', 'stuff'], callback);
-});
-
-gulp.task('dev', ['watch']);
-gulp.task('run', ['production', 'watch']);
