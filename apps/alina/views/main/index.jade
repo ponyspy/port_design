@@ -23,5 +23,6 @@ block content
 			a.work_item(href='/works/' + work._short_id)
 				.work_images
 					each image,i in work.images
-						.work_image(class=(i == 0) && 'active' style='background-image: url(' + image.thumb + ')')
+						if (!image.gallery)
+							.work_image(style='background-image: url(' + image.thumb + ')')
 				.work_title= work.title
