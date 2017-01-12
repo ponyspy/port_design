@@ -1,7 +1,7 @@
 extends layout
 
 block paths
-	- var content_title= 'alina saulova / works / ' + work.title
+	- var content_title= 'alina saulova / works / ' + work.title.toLowerCase()
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/swiper.min.css' + version)
