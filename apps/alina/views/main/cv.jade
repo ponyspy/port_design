@@ -1,0 +1,14 @@
+extends layout
+
+block paths
+	- var content_title= 'alina saulova / cv'
+
+block content_style
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/global.css' + version)
+	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/main.css' + version)
+
+block content_scripts
+	script(type='text/javascript', src='/build/js/' + __app_name + '/main.js' + version)
+
+block content
+	!= html

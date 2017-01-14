@@ -5,7 +5,6 @@ block paths
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/swiper.min.css' + version)
-	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/global.css' + version)
 	link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/work.css' + version)
 
 block content_scripts
@@ -13,7 +12,7 @@ block content_scripts
 	script(type='text/javascript', src='/build/js/' + __app_name + '/work.js' + version)
 
 block title
-	.title_sub= work.title
+	span= work.title
 
 block content
 	- var sizes = ['size_400', 'size_600', 'size_800' ]
