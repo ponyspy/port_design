@@ -7,12 +7,12 @@ $(function() {
 		$(this).children('.work_image').first().addClass('active');
 	});
 
-	$('.work_item')
+	$('.work_item').not('.hover')
 		.on('mouseenter', function(e) {
-			$(this).children('.work_poster').not('.hover').addClass('hide');
+			$(this).children('.work_poster').addClass('hide');
 		})
 		.on('mouseleave', function(e) {
-			$(this).children('.work_poster').not('.hover').removeClass('hide');
+			$(this).children('.work_poster').removeClass('hide');
 		});
 
 	$('.work_image')

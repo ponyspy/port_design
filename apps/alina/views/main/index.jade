@@ -15,9 +15,9 @@ block title
 block content
 	.works_block
 		each work in works
-			a.work_item(href='/works/' + work._short_id)
+			a.work_item(href='/works/' + work._short_id, class=(work.poster_hover ? 'hover' : ''))
 				if work.poster
-					.work_poster(class=(work.poster_hover ? 'hover' : '') style='background-image: url(' + work.poster + ')')
+					.work_poster(style='background-image: url(' + work.poster + ')')
 				.work_images
 					if !work.poster_hover
 						each image,i in work.images
