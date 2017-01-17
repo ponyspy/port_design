@@ -7,12 +7,20 @@ $(function() {
 		$(this).children('.work_image').first().addClass('active');
 	});
 
+	$('.work_item')
+		.on('mouseenter', function(e) {
+			$(this).children('.work_poster').not('.hover').addClass('hide');
+		})
+		.on('mouseleave', function(e) {
+			$(this).children('.work_poster').not('.hover').removeClass('hide');
+		});
+
 	$('.work_image')
 		.on('slidestep', function(e) {
 			var $this = $(this);
 			var $stack = $this.parent('.work_images').children('.work_image');
 
-			if ($stack.length > 1 && $this.index('.work_image') - 1 <= $stack.length) {
+			if ($stack.length > 1 && $this.next().length !== 0) {
 				$stack.removeClass('active').filter(this).next().addClass('active');
 			} else {
 				$stack.removeClass('active').first().addClass('active');
