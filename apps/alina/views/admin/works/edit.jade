@@ -32,11 +32,11 @@ block content
 			+form_text_single('title', work)
 			.form_title Описание:
 			+form_text_multi('description', work)
-			.form_title Постер:
+			.form_title Обложка:
 			input(type='file', name='poster')
 			if (work.poster)
 				input(type='checkbox', name='poster_del')
-				span= ' | удалить постер'
+				span= ' | удалить обложку'
 				br
 				br
 				input(type='checkbox', name='poster_hover', checked= work.poster_hover)
