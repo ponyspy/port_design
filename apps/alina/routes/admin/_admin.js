@@ -26,7 +26,7 @@ module.exports = (function() {
 		.get(checkAuth, admin.cv.edit)
 		.post(checkAuth, admin.cv.edit_form);
 
-	router.use('/works', checkAuth, admin.works);
+	router.use('/works', checkAuth, upload.single('poster'), admin.works);
 	router.use('/users', checkAuth, admin.users);
 
 	router.post('/preview', checkAuth, upload.single('image'), admin.options.preview);

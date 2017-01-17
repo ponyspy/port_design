@@ -7,6 +7,7 @@ module.exports = function(Model, Params) {
 
 	var previewImages = Params.upload.preview;
 	var uploadImages = Params.upload.images;
+	var uploadPoster = Params.upload.image;
 
 
 	module.index = function(req, res, next) {
@@ -27,6 +28,7 @@ module.exports = function(Model, Params) {
 
 	module.form = function(req, res, next) {
 		var post = req.body;
+		var file = req.file;
 		var id = req.params.work_id;
 
 		work.findById(id).exec(function(err, work) {
@@ -36,14 +38,19 @@ module.exports = function(Model, Params) {
 			work.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 			work.title = post.title;
 			work.description = post.description;
+			work.poster_hover = post.poster_hover;
 
 			uploadImages(work, 'works', post.images, function(err, work) {
 				if (err) return next(err);
 
-				work.save(function(err, work) {
+				uploadPoster(work, 'works', 'poster', file, post.poster_del, function(err, work) {
 					if (err) return next(err);
 
-					res.redirect('/admin/works');
+					work.save(function(err, work) {
+						if (err) return next(err);
+
+						res.redirect('/admin/works');
+					});
 				});
 			});
 		});

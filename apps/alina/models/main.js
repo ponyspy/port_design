@@ -25,6 +25,8 @@ var workSchema = new Schema({
 	title: { type: String, trim: true },
 	description: { type: String, trim: true },
 	status: String,
+	poster: String,
+	poster_hover: Boolean,
 	images: [{
 		size: Number,
 		gallery: Boolean,

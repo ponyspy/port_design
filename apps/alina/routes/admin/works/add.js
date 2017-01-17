@@ -7,6 +7,7 @@ module.exports = function(Model, Params) {
 	var Work = Model.Work;
 
 	var uploadImages = Params.upload.images;
+	var uploadPoster = Params.upload.image;
 
 
 	module.index = function(req, res, next) {
@@ -16,6 +17,7 @@ module.exports = function(Model, Params) {
 
 	module.form = function(req, res, next) {
 		var post = req.body;
+		var file = req.file;
 
 		var work = new Work();
 
@@ -28,10 +30,14 @@ module.exports = function(Model, Params) {
 		uploadImages(work, 'works', post.images, function(err, work) {
 			if (err) return next(err);
 
-			work.save(function(err, work) {
+			uploadPoster(work, 'works', 'poster', file, null, function(err, work) {
 				if (err) return next(err);
 
-				res.redirect('/admin/works');
+				work.save(function(err, work) {
+					if (err) return next(err);
+
+					res.redirect('/admin/works');
+				});
 			});
 		});
 	};

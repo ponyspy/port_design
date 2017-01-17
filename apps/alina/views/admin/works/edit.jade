@@ -27,11 +27,20 @@ block sub_menu
 block content
 	.form_block
 		.title= content_title
-		form(action="", method="post")
+		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Название:
 			+form_text_single('title', work)
 			.form_title Описание:
 			+form_text_multi('description', work)
+			.form_title Постер:
+			input(type='file', name='poster')
+			if (work.poster)
+				input(type='checkbox', name='poster_del')
+				span= ' | удалить постер'
+				br
+				br
+				input(type='checkbox', name='poster_hover', checked= work.poster_hover)
+				span= ' | отключить наведение в списке работ'
 			.form_title Изображения:
 			+form_images_upload(work.images)
 			.form_title Видимость:
