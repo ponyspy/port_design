@@ -5,6 +5,9 @@ mixin items(works)
 			a.item_title(href='/admin/works/edit/' + work._id, class=work.status =='hidden' ? 'hidden': '')= work.title || '!!! ПУСТОЕ ПОЛЕ !!!'
 			span= ' | '
 			span.item_images= work.images.length
+			if work.poster
+				span= ' + '
+				span.item_poster= 'p'
 
 mixin counters(count, skip)
 	a.list_back(href='#'): b назад
