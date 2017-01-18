@@ -8,11 +8,14 @@ html
 			block content
 		.footer_block
 			.left
-				.counter
+				span.cv info
+				if (session && session.user_id)
+					a.stargazer(href='/auth' target='_blank') stargazer
+				//- .counter
 					span.current 1
 					//- span /
 					//- span.count 6
-			.right
-				if (session && session.user_id)
-					a.stargazer(href='/auth') stargazer
-				span.cv cv
+			//- .right
+			//- 	if (session && session.user_id)
+			//- 		a.stargazer(href='/auth') stargazer
+			//- 	span.cv info

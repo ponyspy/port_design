@@ -24,7 +24,7 @@ $(function() {
 					current = data.current;
 
 					$('.content_block').html(data.html).find('.run').delay(300).queue(function() { $(this).addClass('go'); $(this).dequeue(); });
-					$('.current').text(current);
+					// $('.current').text(current);
 
 					$('.block').each(function() {
 						$(this).children('.image_item').eq(0).addClass('active');
