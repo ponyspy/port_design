@@ -32,7 +32,8 @@ var workSchema = new Schema({
 		gallery: Boolean,
 		description: { type: String, trim: true },
 		original: String,
-		thumb: String
+		thumb: String,
+		preview: String
 	}],
 	_short_id: { type: String, unique: true, index: true, sparse: true },
 	date: { type: Date, default: Date.now },

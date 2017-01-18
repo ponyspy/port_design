@@ -22,5 +22,5 @@ block content
 					if !work.poster_hover
 						each image,i in work.images
 							if (!image.gallery)
-								.work_image(style='background-image: url(' + image.thumb + ')')
+								.work_image(style='background-image: url(' + image.preview + ')')
 				.work_title= work.title
