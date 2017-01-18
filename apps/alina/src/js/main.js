@@ -1,10 +1,12 @@
 $(function() {
 	var deltaX = 0;
 	var deltaY = 0;
-	var step = 95;
+	var step = 85;
 
 	$('.work_images').each(function() {
-		$(this).children('.work_image').first().addClass('active');
+		var $this = $(this);
+		$this.children('.work_image').first().addClass('active');
+		$this.data('stack', $this.children('.work_image'));
 	});
 
 	$('.work_item').not('.hover')
@@ -18,7 +20,7 @@ $(function() {
 	$('.work_image')
 		.on('slidestep', function(e) {
 			var $this = $(this);
-			var $stack = $this.parent('.work_images').children('.work_image');
+			var $stack = $this.parent('.work_images').data('stack');
 
 			if ($stack.length > 1 && $this.next().length !== 0) {
 				$stack.removeClass('active').filter(this).next().addClass('active');
