@@ -16,7 +16,7 @@ block title
 
 block content
 	- var sizes = ['size_400', 'size_600', 'size_800' ]
-	.work_description= work.description
+	.work_description!= work.description
 	each item in images
 		if item.length
 			.gallery-block
