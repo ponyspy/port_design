@@ -19,24 +19,18 @@ block content
 	each item in images
 		if item.length
 			- var g_size = 'g_800'
-			if item.every(function(item) { return item.size == 800 })
-				- g_size = 'g_800'
-			else if item.every(function(item) { return item.size == 600 })
+			if item.every(function(item) { return item.size == 600 })
 				- g_size = 'g_600'
 			else if item.every(function(item) { return item.size == 400 })
 				- g_size = 'g_400'
-			.gallery-block(style=g_size)
-				.swiper-container.gallery-top
-					.swiper-wrapper
-						each image in item
-							.swiper-slide(style='background-image:url(' + image.thumb  + ')')
-					//- .swiper-button-next.swiper-button-white
-					//- .swiper-button-prev.swiper-button-white
+			.gallery-block(class=g_size)
+				.swiper-container.gallery-top: .swiper-wrapper
+					each image in item.reverse()
+						.swiper-slide(style='background-image:url(' + image.thumb  + ')')
 
-				.swiper-container.gallery-thumbs
-					.swiper-wrapper
-						each image in item
-							.swiper-slide(style='background-image:url(' + image.thumb  + ')')
+				.swiper-container.gallery-thumbs: .swiper-wrapper
+					each image in item
+						.swiper-slide(style='background-image:url(' + image.thumb  + ')')
 		else
 			- var sizes = ['size_400', 'size_600', 'size_800' ]
 			img.image(src=item.thumb, class=sizes[sizes.indexOf('size_' + item.size)])
