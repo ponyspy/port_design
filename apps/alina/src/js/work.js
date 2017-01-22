@@ -6,8 +6,8 @@ $(function() {
 
 		var galleryTop = new Swiper($gallery_top, {
 			initialSlide: 2000,
-			nextButton: '.swiper-button-next',
-			prevButton: '.swiper-button-prev',
+			// nextButton: '.swiper-button-next',
+			// prevButton: '.swiper-button-prev',
 			spaceBetween: 10,
 		});
 
