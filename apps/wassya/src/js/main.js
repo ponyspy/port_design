@@ -1,4 +1,5 @@
 var current = 1;
+var stack = [];
 
 $(function() {
 	$('.block').each(function() {
@@ -10,6 +11,11 @@ $(function() {
 	});
 
 	$(document)
+		.on('click', 'body', function(e) {
+			if (e.target.className !== '') {
+				$('.block').eq(stack.pop()).find('.image_item').removeClass('active').prev().addClass('active');
+			}
+		})
 		.on('mousedown', 'img', function(e) {
 			return false;
 		})
@@ -18,8 +24,10 @@ $(function() {
 			var $active_image = $(this).closest('.image_item');
 
 			if ($active_image.index() < $active_block.children('.image_item').length - 1) {
+				stack.push($active_block.index());
 				$active_image.removeClass('active').next().addClass('active');
 			} else {
+				stack = [];
 				$.post('', { index: current }).done(function(data) {
 					current = data.current;
 
