@@ -13,7 +13,7 @@ $(function() {
 	$(document)
 		.on('click', 'body', function(e) {
 			if (e.target.className !== '') {
-				$('.block').eq(stack.pop()).find('.image_item').removeClass('active').prev().addClass('active');
+				$('.block').eq(stack.pop()).find('.image_item.active').removeClass('active').prev().addClass('active');
 			}
 		})
 		.on('mousedown', 'img', function(e) {
