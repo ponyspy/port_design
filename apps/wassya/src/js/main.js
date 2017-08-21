@@ -7,7 +7,7 @@ $(function() {
 	});
 
 	$('.cv').on('click', function(e) {
-		window.open('/cv', '', 'width=360, height=500, left=200, top=200');
+		window.open('/info', '', 'width=400, height=600, left=30, top=30');
 	});
 
 	$(document)

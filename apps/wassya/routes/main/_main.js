@@ -14,7 +14,7 @@ module.exports = (function() {
 		.get(main.index.index)
 		.post(main.index.get_works);
 
-	router.route('/cv')
+	router.route('/info')
 		.get(main.content.cv);
 
 	return router;
