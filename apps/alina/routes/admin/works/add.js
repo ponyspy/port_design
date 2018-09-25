@@ -25,6 +25,7 @@ module.exports = function(Model, Params) {
 		work.status = post.status;
 		work.date = moment(post.date.date + 'T' + post.date.time.hours + ':' + post.date.time.minutes);
 		work.title = post.title;
+		work.s_title = post.s_title;
 		work.description = post.description;
 
 		uploadImages(work, 'works', post.images, function(err, work) {

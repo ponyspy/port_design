@@ -23,6 +23,7 @@ var userSchema = new Schema({
 
 var workSchema = new Schema({
 	title: { type: String, trim: true },
+	s_title: { type: String, trim: true },
 	description: { type: String, trim: true },
 	status: String,
 	poster: String,

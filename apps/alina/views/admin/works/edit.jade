@@ -30,6 +30,8 @@ block content
 		form(action="", method="post", enctype="multipart/form-data")
 			.form_title Название:
 			+form_text_single('title', work)
+			.form_title Подзаголовок:
+			+form_text_single('s_title', work)
 			.form_title Описание:
 			+form_text_multi('description', work)
 			.form_title Обложка:

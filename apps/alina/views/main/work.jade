@@ -2,6 +2,8 @@ extends layout
 
 block paths
 	- var content_title= 'alina saulova / works / ' + work.title.toLowerCase()
+	- var content_description = work.s_title
+	- var content_images = [work.poster]
 
 block content_style
 	link(rel='stylesheet', type='text/css', href='/libs/css/swiper.min.css' + version)

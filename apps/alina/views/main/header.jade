@@ -7,6 +7,8 @@ if content_title
 	title= content_title
 if content_description
 	meta(name='description', content=content_description)
+each image in content_images || []
+	meta(property='og:image' content='http://' + host + image)
 
 link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/fonts.css' + version)
 link(rel='stylesheet', type='text/css', href='/build/css/' + __app_name + '/global.css' + version)
