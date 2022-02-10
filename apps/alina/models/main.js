@@ -5,7 +5,7 @@ var Schema = mongoose.Schema,
 		ObjectId = Schema.ObjectId;
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/' +  __app_name, {
+mongoose.connect('mongodb://127.0.0.1/' +  __app_name, {
 	// useCreateIndex: true,
 	// useFindAndModify: false,
 	useNewUrlParser: true,

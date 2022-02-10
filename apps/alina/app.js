@@ -33,7 +33,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false,
 	secret: 'keyboard cat',
-	store: MongoStore.create({ mongoUrl: 'mongodb://localhost/' + __app_name }),
+	store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/' + __app_name }),
 	cookie: {
 		path: '/',
 		maxAge: 1000 * 60 * 60 * 12 // 12 hours
