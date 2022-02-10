@@ -8,7 +8,7 @@ var express = require('express'),
 		session = require('express-session'),
 			app = express();
 
-var MongoStore = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo');
 
 app.set('x-powered-by', false);
 app.set('views', __app_root + '/views');
@@ -33,7 +33,7 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false,
 	secret: 'keyboard cat',
-	store: new MongoStore({ url: 'mongodb://localhost/' + __app_name }),
+	store: MongoStore.create({ mongoUrl: 'mongodb://localhost/' + __app_name }),
 	cookie: {
 		path: '/',
 		maxAge: 1000 * 60 * 60 * 12 // 12 hours
